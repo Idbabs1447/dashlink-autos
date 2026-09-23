@@ -1,0 +1,10 @@
+{
+  "description": "This automotive dealership website offers a practical marketplace for browsing and purchasing foreign-used vehicles in Lagos, Nigeria, with easy WhatsApp communication.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Poppins', sans-serif;
+  --color-navy: #07172F;
+  --color-red: #C41E3A;
+  --color-surface: #F6F8FB;
+  --color-border: #E1E6EE;
+  --color-muted: #64748B;
+  --color-wa: #25D366;
+}
+
+* { font-family: 'Poppins', sans-serif; }
+body { background: #F6F8FB; color: #08172F; }
+
+html { scroll-behavior: smooth; }
+
+/* Smooth link + button interactions */
+a, button { transition-property: color, background-color, border-color, opacity, transform, box-shadow; transition-duration: 150ms; transition-timing-function: ease; }
+button:active { transform: scale(0.97); }
+
+/* Scroll to top on route change — handled via JS, this ensures no flash */
+.page-enter { opacity: 0; transform: translateY(10px); }
+
+input, select, textarea, button {
+  font-family: 'Poppins', sans-serif;
+}

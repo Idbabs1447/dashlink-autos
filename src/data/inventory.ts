@@ -28,6 +28,21 @@ export interface Vehicle {
   isNew?: boolean;
 }
 
+// Resolve local images through Vite so they are bundled into the production build.
+// Plain '/src/assets/...' strings only work on the dev server; after `vite build`
+// there is no /src folder, so those URLs 404 on Vercel.
+const assetUrls = import.meta.glob('../assets/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>;
+
+function asset(fileName: string): string {
+  const url = assetUrls[`../assets/${fileName}`];
+  if (!url) console.warn(`Missing inventory image: ${fileName}`);
+  return url ?? '';
+}
+
 const LOCATION = '47 Ogunnusi Road, Ogba, Ikeja, Lagos';
 
 export const inventory: Vehicle[] = [
@@ -45,13 +60,13 @@ export const inventory: Vehicle[] = [
       location: LOCATION,
     },
     images: [
-      '/src/assets/2015-mercedes-gla250-01.jpg',
-      '/src/assets/2015-mercedes-gla250-02.jpg',
-      '/src/assets/2015-mercedes-gla250-03.jpg',
-      '/src/assets/2015-mercedes-gla250-04.jpg',
-      '/src/assets/2015-mercedes-gla250-07.jpg',
-      '/src/assets/2015-mercedes-gla250-08.jpg',
-      '/src/assets/2015-mercedes-gla250-09.jpg',
+      asset('2015-mercedes-gla250-01.jpg'),
+      asset('2015-mercedes-gla250-02.jpg'),
+      asset('2015-mercedes-gla250-03.jpg'),
+      asset('2015-mercedes-gla250-04.jpg'),
+      asset('2015-mercedes-gla250-07.jpg'),
+      asset('2015-mercedes-gla250-08.jpg'),
+      asset('2015-mercedes-gla250-09.jpg'),
     ],
     isNew: true,
   },
@@ -70,12 +85,12 @@ export const inventory: Vehicle[] = [
       location: LOCATION,
     },
     images: [
-      '/src/assets/2012-toyota-camry-01.jpg',
-      '/src/assets/2012-toyota-camry-02.jpg',
-      '/src/assets/2012-toyota-camry-03.jpg',
-      '/src/assets/2012-toyota-camry-04.jpg',
-      '/src/assets/2012-toyota-camry-07.jpg',
-      '/src/assets/2012-toyota-camry-08.jpg',
+      asset('2012-toyota-camry-01.jpg'),
+      asset('2012-toyota-camry-02.jpg'),
+      asset('2012-toyota-camry-03.jpg'),
+      asset('2012-toyota-camry-04.jpg'),
+      asset('2012-toyota-camry-07.jpg'),
+      asset('2012-toyota-camry-08.jpg'),
     ],
     isNew: true,
   },
@@ -92,11 +107,11 @@ export const inventory: Vehicle[] = [
       location: LOCATION,
     },
     images: [
-      '/src/assets/2017-hyundai-elantra-gt-01.jpg',
-      '/src/assets/2017-hyundai-elantra-gt-02.jpg',
-      '/src/assets/2017-hyundai-elantra-gt-04.jpg',
-      '/src/assets/2017-hyundai-elantra-gt-09.jpg',
-      '/src/assets/2017-hyundai-elantra-gt-10.jpg',
+      asset('2017-hyundai-elantra-gt-01.jpg'),
+      asset('2017-hyundai-elantra-gt-02.jpg'),
+      asset('2017-hyundai-elantra-gt-04.jpg'),
+      asset('2017-hyundai-elantra-gt-09.jpg'),
+      asset('2017-hyundai-elantra-gt-10.jpg'),
     ],
     isNew: true,
   },
@@ -113,11 +128,11 @@ export const inventory: Vehicle[] = [
       location: LOCATION,
     },
     images: [
-      '/src/assets/2015-toyota-camry-se-01.jpg',
-      '/src/assets/2015-toyota-camry-se-02.jpg',
-      '/src/assets/2015-toyota-camry-se-03.jpg',
-      '/src/assets/2015-toyota-camry-se-05.jpg',
-      '/src/assets/2015-toyota-camry-se-06.jpg',
+      asset('2015-toyota-camry-se-01.jpg'),
+      asset('2015-toyota-camry-se-02.jpg'),
+      asset('2015-toyota-camry-se-03.jpg'),
+      asset('2015-toyota-camry-se-05.jpg'),
+      asset('2015-toyota-camry-se-06.jpg'),
     ],
   },
   {
@@ -133,12 +148,12 @@ export const inventory: Vehicle[] = [
       location: LOCATION,
     },
     images: [
-      '/src/assets/2013-lexus-es350-01.jpg',
-      '/src/assets/2013-lexus-es350-02.jpg',
-      '/src/assets/2013-lexus-es350-04.jpg',
-      '/src/assets/2013-lexus-es350-06.jpg',
-      '/src/assets/2013-lexus-es350-07.jpg',
-      '/src/assets/2013-lexus-es350-08.jpg',
+      asset('2013-lexus-es350-01.jpg'),
+      asset('2013-lexus-es350-02.jpg'),
+      asset('2013-lexus-es350-04.jpg'),
+      asset('2013-lexus-es350-06.jpg'),
+      asset('2013-lexus-es350-07.jpg'),
+      asset('2013-lexus-es350-08.jpg'),
     ],
   },
   {
@@ -154,13 +169,13 @@ export const inventory: Vehicle[] = [
       location: LOCATION,
     },
     images: [
-      '/src/assets/2016-hyundai-tucson-1-6t-01.jpg',
-      '/src/assets/2016-hyundai-tucson-1-6t-02.jpg',
-      '/src/assets/2016-hyundai-tucson-1-6t-03.jpg',
-      '/src/assets/2016-hyundai-tucson-1-6t-06.jpg',
-      '/src/assets/2016-hyundai-tucson-1-6t-07.jpg',
-      '/src/assets/2016-hyundai-tucson-1-6t-08.jpg',
-      '/src/assets/2016-hyundai-tucson-1-6t-09.jpg',
+      asset('2016-hyundai-tucson-1-6t-01.jpg'),
+      asset('2016-hyundai-tucson-1-6t-02.jpg'),
+      asset('2016-hyundai-tucson-1-6t-03.jpg'),
+      asset('2016-hyundai-tucson-1-6t-06.jpg'),
+      asset('2016-hyundai-tucson-1-6t-07.jpg'),
+      asset('2016-hyundai-tucson-1-6t-08.jpg'),
+      asset('2016-hyundai-tucson-1-6t-09.jpg'),
     ],
   },
   {
